@@ -1,0 +1,917 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Work With Us - R-point & Cafe</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f5f9ff 0%, #e6f3ff 100%);
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        /* Header Styles */
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(135, 206, 250, 0.2);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(135, 206, 250, 0.1);
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: between;
+            padding: 0.5rem 2rem;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .logo img {
+            width: 50px;
+            height: 50px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(135, 206, 250, 0.3);
+        }
+        
+        .logo h1 {
+            color: #1e90ff;
+            font-size: 1.8rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+        
+        .logo .tagline {
+            font-size: 0.8rem;
+            color: #666;
+            font-weight: 400;
+        }
+        
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+            margin-left: auto;
+        }
+        
+        nav a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        nav a:hover {
+            color: #1e90ff;
+            background: rgba(135, 206, 250, 0.1);
+            transform: translateY(-2px);
+        }
+        
+        nav a[href="work.html"] {
+            background: linear-gradient(135deg, #1e90ff, #87ceeb);
+            color: white;
+        }
+        
+        .mobile-menu {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 4px;
+        }
+        
+        .mobile-menu span {
+            width: 25px;
+            height: 3px;
+            background: #1e90ff;
+            border-radius: 2px;
+            transition: 0.3s;
+        }
+        
+        /* Main Content */
+        main {
+            margin-top: 80px;
+        }
+        
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 4rem 2rem;
+            background: linear-gradient(135deg, #e6f3ff 0%, #f0f8ff 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="50" cy="50" r="1" fill="%23ADD8E6" opacity="0.1"/></pattern></defs><rect width="100%" height="100%" fill="url(%23grain)"/></svg>');
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .hero h2 {
+            font-size: 3rem;
+            color: #1e90ff;
+            margin-bottom: 1rem;
+            font-weight: 700;
+            letter-spacing: -1px;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            color: #666;
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        /* Career Opportunities Section */
+        .career-section {
+            padding: 4rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .career-section h3 {
+            text-align: center;
+            font-size: 2.5rem;
+            color: #1e90ff;
+            margin-bottom: 3rem;
+            font-weight: 600;
+        }
+        
+        .career-intro {
+            background: white;
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(135, 206, 250, 0.2);
+            margin-bottom: 3rem;
+            text-align: center;
+            border: 1px solid rgba(135, 206, 250, 0.2);
+        }
+        
+        .career-intro h4 {
+            font-size: 1.8rem;
+            color: #1e90ff;
+            margin-bottom: 1rem;
+        }
+        
+        .career-intro p {
+            font-size: 1.1rem;
+            color: #666;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+        
+        /* Job Positions */
+        .job-positions {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .job-card {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(135, 206, 250, 0.15);
+            border: 1px solid rgba(135, 206, 250, 0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .job-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 50px rgba(135, 206, 250, 0.25);
+        }
+        
+        .job-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 1.5rem;
+        }
+        
+        .job-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #1e90ff, #87ceeb);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+        }
+        
+        .job-title {
+            flex: 1;
+        }
+        
+        .job-title h4 {
+            font-size: 1.5rem;
+            color: #333;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        
+        .job-type {
+            background: rgba(30, 144, 255, 0.1);
+            color: #1e90ff;
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+        
+        .job-description {
+            margin-bottom: 1.5rem;
+            color: #666;
+            line-height: 1.7;
+        }
+        
+        .job-requirements {
+            margin-bottom: 2rem;
+        }
+        
+        .job-requirements h5 {
+            color: #333;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+        
+        .requirements-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .requirements-list li {
+            padding: 0.5rem 0;
+            color: #666;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+        
+        .requirements-list li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #1e90ff;
+            font-weight: bold;
+        }
+        
+        .job-benefits {
+            background: linear-gradient(135deg, #f8fbff 0%, #e6f3ff 100%);
+            padding: 1.5rem;
+            border-radius: 15px;
+            margin-bottom: 2rem;
+        }
+        
+        .job-benefits h5 {
+            color: #1e90ff;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+        
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 1rem;
+        }
+        
+        .benefit-item {
+            text-align: center;
+            padding: 1rem;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(135, 206, 250, 0.1);
+        }
+        
+        .benefit-item i {
+            color: #1e90ff;
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .benefit-item span {
+            font-size: 0.9rem;
+            color: #666;
+        }
+        
+        .apply-btn {
+            width: 100%;
+            background: linear-gradient(135deg, #1e90ff, #87ceeb);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(30, 144, 255, 0.3);
+        }
+        
+        .apply-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(30, 144, 255, 0.4);
+        }
+        
+        /* Application Form */
+        .application-form {
+            background: white;
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(135, 206, 250, 0.2);
+            border: 1px solid rgba(135, 206, 250, 0.2);
+            margin-top: 3rem;
+        }
+        
+        .application-form h4 {
+            font-size: 2rem;
+            color: #1e90ff;
+            text-align: center;
+            margin-bottom: 2rem;
+            font-weight: 600;
+        }
+        
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #333;
+            font-weight: 500;
+        }
+        
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid rgba(135, 206, 250, 0.3);
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+        
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #1e90ff;
+        }
+        
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+        
+        .submit-btn {
+            width: 100%;
+            background: linear-gradient(135deg, #1e90ff, #87ceeb);
+            color: white;
+            border: none;
+            padding: 1.2rem 2rem;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(30, 144, 255, 0.3);
+        }
+        
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(30, 144, 255, 0.4);
+        }
+        
+        /* Footer */
+        footer {
+            background: linear-gradient(135deg, #1e90ff, #87ceeb);
+            color: white;
+            padding: 3rem 2rem 1rem;
+            margin-top: 4rem;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        
+        .footer-section h4 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+        
+        .footer-section p,
+        .footer-section a {
+            color: rgba(255, 255, 255, 0.9);
+            text-decoration: none;
+            line-height: 1.8;
+        }
+        
+        .footer-section a:hover {
+            color: white;
+            text-decoration: underline;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            color: rgba(255, 255, 255, 0.8);
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-container {
+                padding: 0.5rem 1rem;
+            }
+            
+            nav ul {
+                display: none;
+            }
+            
+            .mobile-menu {
+                display: flex;
+            }
+            
+            .hero h2 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .career-section h3 {
+                font-size: 2rem;
+            }
+            
+            .job-positions {
+                grid-template-columns: 1fr;
+            }
+            
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .benefits-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="nav-container">
+            <div class="logo">
+                <img src="Photo\logo.jpeg" alt="R-point Logo">
+                <div>
+                    <h1>R-point & Cafe</h1>
+                    <div class="tagline">By Sukhen</div>
+                </div>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="services.html">Our Services</a></li>
+                    <li><a href="career.html">Career Updates</a></li>
+                    <li><a href="work.html">Work With Us</a></li>
+                    <li><a href="contact.html">Contact Us</a></li>
+                </ul>
+            </nav>
+            <div class="mobile-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </header>
+    
+    <main>
+        <section class="hero">
+            <div class="hero-content">
+                <h2>Work With Us</h2>
+                <p>Join our dynamic team and build a rewarding career in digital services. We offer excellent growth opportunities and a supportive work environment.</p>
+            </div>
+        </section>
+        
+        <section class="career-section">
+            <h3>Career Opportunities</h3>
+            
+            <div class="career-intro">
+                <h4>Build Your Future with R-point & Cafe</h4>
+                <p>We are always looking for talented, dedicated, and passionate individuals to join our growing team. Whether you're starting your career or looking for new opportunities, we provide a platform for professional growth and personal development.</p>
+                <p>At R-point & Cafe, we believe in fostering an inclusive, innovative, and collaborative work environment where every team member can thrive and contribute to our mission of providing exceptional digital services.</p>
+            </div>
+            
+            <div class="job-positions">
+                <div class="job-card">
+                    <div class="job-header">
+                        <div class="job-icon">
+                            <i class="fas fa-user-tie"></i>
+                        </div>
+                        <div class="job-title">
+                            <h4>Customer Service Executive</h4>
+                            <span class="job-type">Full Time</span>
+                        </div>
+                    </div>
+                    <div class="job-description">
+                        <p>Handle customer inquiries, assist with documentation processes, and ensure excellent customer satisfaction. Be the first point of contact for our valued customers.</p>
+                    </div>
+                    <div class="job-requirements">
+                        <h5>Requirements:</h5>
+                        <ul class="requirements-list">
+                            <li>Good communication skills in English and local languages</li>
+                            <li>Basic computer knowledge</li>
+                            <li>Customer service experience preferred</li>
+                            <li>Professional attitude and appearance</li>
+                        </ul>
+                    </div>
+                    <div class="job-benefits">
+                        <h5>Benefits & Perks:</h5>
+                        <div class="benefits-grid">
+                            <div class="benefit-item">
+                                <i class="fas fa-rupee-sign"></i>
+                                <div><span>Competitive Salary</span></div>
+                            </div>
+                            <div class="benefit-item">
+                                <i class="fas fa-graduation-cap"></i>
+                                <div><span>Training</span></div>
+                            </div>
+                            <div class="benefit-item">
+                                <i class="fas fa-chart-line"></i>
+                                <div><span>Growth</span></div>
+                            </div>
+                            <div class="benefit-item">
+                                <i class="fas fa-shield-alt"></i>
+                                <div><span>Job Security</span></div>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="apply-btn" onclick="scrollToApplication()">Apply Now</button>
+                </div>
+                
+                <div class="job-card">
+                    <div class="job-header">
+                        <div class="job-icon">
+                            <i class="fas fa-file-alt"></i>
+                        </div>
+                        <div class="job-title">
+                            <h4>Documentation Specialist</h4>
+                            <span class="job-type">Full Time</span>
+                        </div>
+                    </div>
+                    <div class="job-description">
+                        <p>Process various government documents, handle applications, and ensure accuracy in all documentation work. Knowledge of government procedures is essential.</p>
+                    </div>
+                    <div class="job-requirements">
+                        <h5>Requirements:</h5>
+                        <ul class="requirements-list">
+                            <li>Knowledge of government documentation processes</li>
+                            <li>Attention to detail and accuracy</li>
+                            <li>Computer proficiency (MS Office, Internet)</li>
+                            <li>Graduate degree preferred</li>
+                        </ul>
+                    </div>
+                    <div class="job-benefits">
+                        <h5>Benefits & Perks:</h5>
+                        <div class="benefits-grid">
+                            <div class="benefit-item">
+                                <i class="fas fa-rupee-sign"></i>
+                                <div><span>Good Pay</span></div>
+                            </div>
+                            <div class="benefit-item">
+                                <i class="fas fa-clock"></i>
+                                <div><span>Fixed Hours</span></div>
+                            </div>
+                            <div class="benefit-item">
+                                <i class="fas fa-user-friends"></i>
+                                <div><span>Team Work</span></div>
+                            </div>
+                            <div class="benefit-item">
+                                <i class="fas fa-medal"></i>
+                                <div><span>Recognition</span></div>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="apply-btn" onclick="scrollToApplication()">Apply Now</button>
+                </div>
+                
+                <div class="job-card">
+                    <div class="job-header">
+                        <div class="job-icon">
+                            <i class="fas fa-laptop-code"></i>
+                        </div>
+                        <div class="job-title">
+                            <h4>Digital Marketing Assistant</h4>
+                            <span class="job-type">Part Time</span>
+                        </div>
+                    </div>
+                    <div class="job-description">
+                        <p>Manage social media accounts, create content, and help with online marketing activities. Perfect for someone with creative skills and social media knowledge.</p>
+                    </div>
+                    <div class="job-requirements">
+                        <h5>Requirements:</h5>
+                        <ul class="requirements-list">
+                            <li>Social media management experience</li>
+                            <li>Basic graphic design skills</li>
+                            <li>Content creation abilities</li>
+                            <li>Knowledge of digital marketing trends</li>
+                        </ul>
+                    </div>
+                    <div class="job-benefits">
+                        <h5>Benefits & Perks:</h5>
+                        <div class="benefits-grid">
+                            <div class="benefit-item">
+                                <i class="fas fa-home"></i>
+                                <div><span>Remote Work</span></div>
+                            </div>
+                            <div class="benefit-item">
+                                <i class="fas fa-palette"></i>
+                                <div><span>Creative</span></div>
+                            </div>
+                            <div class="benefit-item">
+                                <i class="fas fa-clock"></i>
+                                <div><span>Flexible</span></div>
+                            </div>
+                            <div class="benefit-item">
+                                <i class="fas fa-star"></i>
+                                <div><span>Modern</span></div>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="apply-btn" onclick="scrollToApplication()">Apply Now</button>
+                </div>
+                
+                <div class="job-card">
+                    <div class="job-header">
+                        <div class="job-icon">
+                            <i class="fas fa-handshake"></i>
+                        </div>
+                        <div class="job-title">
+                            <h4>Business Development Intern</h4>
+                            <span class="job-type">Internship</span>
+                        </div>
+                    </div>
+                    <div class="job-description">
+                        <p>Learn business development skills, assist with client relations, and gain hands-on experience in service industry. Great opportunity for fresh graduates.</p>
+                    </div>
+                    <div class="job-requirements">
+                        <h5>Requirements:</h5>
+                        <ul class="requirements-list">
+                            <li>Recent graduate or final year student</li>
+                            <li>Good communication skills</li>
+                            <li>Eagerness to learn and grow</li>
+                            <li>Basic understanding of business concepts</li>
+                        </ul>
+                    </div>
+                    <div class="job-benefits">
+                        <h5>Benefits & Perks:</h5>
+                        <div class="benefits-grid">
+                            <div class="benefit-item">
+                                <i class="fas fa-graduation-cap"></i>
+                                <div><span>Learning</span></div>
+                            </div>
+                            <div class="benefit-item">
+                                <i class="fas fa-certificate"></i>
+                                <div><span>Certificate</span></div>
+                            </div>
+                            <div class="benefit-item">
+                                <i class="fas fa-network-wired"></i>
+                                <div><span>Network</span></div>
+                            </div>
+                            <div class="benefit-item">
+                                <i class="fas fa-arrow-up"></i>
+                                <div><span>Growth</span></div>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="apply-btn" onclick="scrollToApplication()">Apply Now</button>
+                </div>
+            </div>
+            
+            <div class="application-form" id="application-form">
+                <h4>Apply for a Position</h4>
+                <form id="jobApplicationForm">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="fullName">Full Name *</label>
+                            <input type="text" id="fullName" name="fullName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email Address *</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone Number *</label>
+                            <input type="tel" id="phone" name="phone" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="position">Position Applied For *</label>
+                            <select id="position" name="position" required>
+                                <option value="">Select Position</option>
+                                <option value="customer-service">Customer Service Executive</option>
+                                <option value="documentation">Documentation Specialist</option>
+                                <option value="digital-marketing">Digital Marketing Assistant</option>
+                                <option value="business-development">Business Development Intern</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="experience">Years of Experience</label>
+                            <select id="experience" name="experience">
+                                <option value="">Select Experience</option>
+                                <option value="0-1">0-1 years</option>
+                                <option value="1-3">1-3 years</option>
+                                <option value="3-5">3-5 years</option>
+                                <option value="5+">5+ years</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="education">Highest Education</label>
+                            <select id="education" name="education">
+                                <option value="">Select Education</option>
+                                <option value="high-school">High School</option>
+                                <option value="diploma">Diploma</option>
+                                <option value="bachelor">Bachelor's Degree</option>
+                                <option value="master">Master's Degree</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="address">Address</label>
+                        <textarea id="address" name="address" placeholder="Enter your complete address"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="coverLetter">Why do you want to work with us?</label>
+                        <textarea id="coverLetter" name="coverLetter" placeholder="Tell us about yourself and why you're interested in this position"></textarea>
+                    </div>
+                    <button type="submit" class="submit-btn">Submit Application</button>
+                </form>
+            </div>
+        </section>
+    </main>
+    
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>Contact Information</h4>
+                <p><i class="fas fa-phone"></i> 9749161047</p>
+                <p><i class="fas fa-envelope"></i> sukhenmalick55@gmail.com</p>
+                <div class="social-links">
+                    <a href="https://www.facebook.com/m.sukhen99" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://www.instagram.com/m.sukhen99" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a href="https://x.com/sukhenmalick55" target="_blank"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <p><a href="about.html">About Us</a></p>
+                <p><a href="services.html">Our Services</a></p>
+                <p><a href="career.html">Career Updates</a></p>
+                <p><a href="contact.html">Contact Us</a></p>
+            </div>
+            <div class="footer-section">
+                <h4>Our Services</h4>
+                <p>PAN Card Services</p>
+                <p>Aadhaar Card Services</p>
+                <p>Insurance Services</p>
+                <p>Government Documentation</p>
+            </div>
+            <div class="footer-section">
+                <h4>Find Us Online</h4>
+                <p><a href="https://posts.gle/juuSESRWgUe49BA57?g_st=aw" target="_blank">Google Business</a></p>
+                <p><a href="https://share.google/R8HjfofFv4lW0A1NX" target="_blank">Location on Google</a></p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 R-point & Cafe. All rights reserved. Designed with ❤️ by Sukhen</p>
+        </div>
+    </footer>
+    
+    <script>
+        // Mobile menu functionality
+        document.querySelector('.mobile-menu').addEventListener('click', function() {
+            document.querySelector('nav ul').style.display = 
+                document.querySelector('nav ul').style.display === 'flex' ? 'none' : 'flex';
+        });
+        
+        // Scroll to application form
+        function scrollToApplication() {
+            document.getElementById('application-form').scrollIntoView({ 
+                behavior: 'smooth' 
+            });
+        }
+        
+        // Form submission
+        document.getElementById('jobApplicationForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form data
+            const formData = new FormData(this);
+            const data = {};
+            formData.forEach((value, key) => {
+                data[key] = value;
+            });
+            
+            // Simple validation
+            if (!data.fullName || !data.email || !data.phone || !data.position) {
+                alert('Please fill in all required fields.');
+                return;
+            }
+            
+            // Success message
+            alert('Thank you for your application! We will review your submission and contact you soon.');
+            
+            // Reset form
+            this.reset();
+        });
+        
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('nav a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

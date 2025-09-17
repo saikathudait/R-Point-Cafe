@@ -1,0 +1,1095 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Career Updates - R-point & Cafe</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f5f9ff 0%, #e6f3ff 100%);
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        /* Header Styles */
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(135, 206, 250, 0.2);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(135, 206, 250, 0.1);
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: between;
+            padding: 0.5rem 2rem;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .logo img {
+            width: 50px;
+            height: 50px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(135, 206, 250, 0.3);
+        }
+        
+        .logo h1 {
+            color: #1e90ff;
+            font-size: 1.8rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+        
+        .logo .tagline {
+            font-size: 0.8rem;
+            color: #666;
+            font-weight: 400;
+        }
+        
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+            margin-left: auto;
+        }
+        
+        nav a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        nav a:hover {
+            color: #1e90ff;
+            background: rgba(135, 206, 250, 0.1);
+            transform: translateY(-2px);
+        }
+        
+        .mobile-menu {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 4px;
+        }
+        
+        .mobile-menu span {
+            width: 25px;
+            height: 3px;
+            background: #1e90ff;
+            border-radius: 2px;
+            transition: 0.3s;
+        }
+        
+        /* Main Content */
+        main {
+            margin-top: 80px;
+        }
+        
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 4rem 2rem 2rem;
+            background: linear-gradient(135deg, #e6f3ff 0%, #f0f8ff 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="50" cy="50" r="1" fill="%23ADD8E6" opacity="0.1"/></pattern></defs><rect width="100%" height="100%" fill="url(%23grain)"/></svg>');
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .hero h2 {
+            font-size: 3rem;
+            color: #1e90ff;
+            margin-bottom: 1rem;
+            font-weight: 700;
+            letter-spacing: -1px;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            color: #666;
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        /* Career Updates Section */
+        .career-section {
+            padding: 4rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .filter-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+        
+        .filter-tab {
+            padding: 0.8rem 1.5rem;
+            background: white;
+            border: 2px solid #1e90ff;
+            border-radius: 25px;
+            color: #1e90ff;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .filter-tab:hover,
+        .filter-tab.active {
+            background: #1e90ff;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(30, 144, 255, 0.3);
+        }
+        
+        .jobs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+        
+        .job-card {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 8px 30px rgba(135, 206, 250, 0.1);
+            border: 1px solid rgba(135, 206, 250, 0.2);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .job-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #1e90ff, #87ceeb);
+        }
+        
+        .job-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(135, 206, 250, 0.2);
+        }
+        
+        .job-header {
+            display: flex;
+            justify-content: between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+        
+        .job-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #1e90ff;
+            margin-bottom: 0.5rem;
+        }
+        
+        .job-type {
+            background: rgba(30, 144, 255, 0.1);
+            color: #1e90ff;
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        
+        .job-organization {
+            font-size: 1.1rem;
+            color: #333;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        
+        .job-location {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+        
+        .job-details {
+            margin-bottom: 1.5rem;
+        }
+        
+        .job-detail {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            color: #666;
+        }
+        
+        .job-detail i {
+            color: #1e90ff;
+            width: 16px;
+        }
+        
+        .job-description {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+        
+        .job-actions {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .apply-btn {
+            flex: 1;
+            background: linear-gradient(135deg, #1e90ff, #87ceeb);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 25px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            text-align: center;
+        }
+        
+        .apply-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(30, 144, 255, 0.3);
+        }
+        
+        .save-btn {
+            background: white;
+            color: #1e90ff;
+            border: 2px solid #1e90ff;
+            padding: 0.8rem 1rem;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+        }
+        
+        .save-btn:hover {
+            background: #1e90ff;
+            color: white;
+        }
+        
+        .job-meta {
+            display: flex;
+            justify-content: between;
+            align-items: center;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(135, 206, 250, 0.2);
+        }
+        
+        .posted-date {
+            font-size: 0.8rem;
+            color: #999;
+        }
+        
+        .deadline {
+            background: rgba(255, 87, 87, 0.1);
+            color: #ff5757;
+            padding: 0.2rem 0.8rem;
+            border-radius: 10px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        
+        .urgent {
+            background: rgba(255, 87, 87, 0.1);
+            color: #ff5757;
+            padding: 0.2rem 0.5rem;
+            border-radius: 10px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .no-jobs {
+            text-align: center;
+            padding: 4rem 2rem;
+            color: #666;
+        }
+        
+        .no-jobs i {
+            font-size: 4rem;
+            color: #1e90ff;
+            margin-bottom: 1rem;
+        }
+        
+        /* Search and Filters */
+        .search-section {
+            background: white;
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 8px 30px rgba(135, 206, 250, 0.1);
+            margin-bottom: 3rem;
+            border: 1px solid rgba(135, 206, 250, 0.2);
+        }
+        
+        .search-form {
+            display: grid;
+            grid-template-columns: 1fr 1fr auto;
+            gap: 1rem;
+            align-items: end;
+        }
+        
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .form-group label {
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #333;
+        }
+        
+        .form-group input,
+        .form-group select {
+            padding: 0.8rem 1rem;
+            border: 2px solid rgba(135, 206, 250, 0.3);
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #1e90ff;
+            box-shadow: 0 0 0 3px rgba(30, 144, 255, 0.1);
+        }
+        
+        .search-btn {
+            background: linear-gradient(135deg, #1e90ff, #87ceeb);
+            color: white;
+            padding: 0.8rem 2rem;
+            border: none;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            height: fit-content;
+        }
+        
+        .search-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(30, 144, 255, 0.3);
+        }
+        
+        /* Footer */
+        footer {
+            background: linear-gradient(135deg, #1e90ff, #87ceeb);
+            color: white;
+            padding: 3rem 2rem 1rem;
+            margin-top: 4rem;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        
+        .footer-section h4 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+        
+        .footer-section p,
+        .footer-section a {
+            color: rgba(255, 255, 255, 0.9);
+            text-decoration: none;
+            line-height: 1.8;
+        }
+        
+        .footer-section a:hover {
+            color: white;
+            text-decoration: underline;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            color: rgba(255, 255, 255, 0.8);
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-container {
+                padding: 0.5rem 1rem;
+            }
+            
+            nav ul {
+                display: none;
+            }
+            
+            .mobile-menu {
+                display: flex;
+            }
+            
+            .hero h2 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .search-form {
+                grid-template-columns: 1fr;
+            }
+            
+            .job-actions {
+                flex-direction: column;
+            }
+            
+            .filter-tabs {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .jobs-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="nav-container">
+            <div class="logo">
+                <img src="Photo\logo.jpeg" alt="R-point Logo">
+                <div>
+                    <h1>R-point & Cafe</h1>
+                    <div class="tagline">By Sukhen</div>
+                </div>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="services.html">Our Services</a></li>
+                    <li><a href="career.html">Career Updates</a></li>
+                    <li><a href="work.html">Work With Us</a></li>
+                    <li><a href="contact.html">Contact Us</a></li>
+                </ul>
+            </nav>
+            <div class="mobile-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </header>
+    
+    <main>
+        <section class="hero">
+            <div class="hero-content">
+                <h2>Government Job Updates</h2>
+                <p>Stay updated with the latest government job notifications, exam dates, and career opportunities across various sectors.</p>
+            </div>
+        </section>
+        
+        <section class="career-section">
+            <div class="search-section">
+                <div class="search-form">
+                    <div class="form-group">
+                        <label for="search-job">Search Jobs</label>
+                        <input type="text" id="search-job" placeholder="Enter job title or keyword...">
+                    </div>
+                    <div class="form-group">
+                        <label for="job-category">Category</label>
+                        <select id="job-category">
+                            <option value="all">All Categories</option>
+                            <option value="central">Central Government</option>
+                            <option value="state">State Government</option>
+                            <option value="railway">Railway</option>
+                            <option value="banking">Banking</option>
+                            <option value="ssc">SSC</option>
+                            <option value="upsc">UPSC</option>
+                            <option value="police">Police & Defence</option>
+                            <option value="teaching">Teaching</option>
+                        </select>
+                    </div>
+                    <button class="search-btn" onclick="searchJobs()">
+                        <i class="fas fa-search"></i> Search
+                    </button>
+                </div>
+            </div>
+            
+            <div class="filter-tabs">
+                <button class="filter-tab active" onclick="filterJobs('all')">All Jobs</button>
+                <button class="filter-tab" onclick="filterJobs('urgent')">Urgent</button>
+                <button class="filter-tab" onclick="filterJobs('new')">New</button>
+                <button class="filter-tab" onclick="filterJobs('closing-soon')">Closing Soon</button>
+            </div>
+            
+            <div class="jobs-grid" id="jobs-container">
+                <!-- Railway Jobs -->
+                <div class="job-card" data-category="railway" data-type="urgent">
+                    <div class="job-header">
+                        <div>
+                            <div class="job-title">Railway Group D Recruitment</div>
+                            <div class="job-organization">Indian Railways</div>
+                            <div class="job-location"><i class="fas fa-map-marker-alt"></i> All India</div>
+                        </div>
+                        <div>
+                            <div class="job-type">Full Time</div>
+                            <div class="urgent">URGENT</div>
+                        </div>
+                    </div>
+                    
+                    <div class="job-details">
+                        <div class="job-detail">
+                            <i class="fas fa-users"></i>
+                            <span>Vacancies: 35,281 Posts</span>
+                        </div>
+                        <div class="job-detail">
+                            <i class="fas fa-graduation-cap"></i>
+                            <span>Qualification: 10th Pass</span>
+                        </div>
+                        <div class="job-detail">
+                            <i class="fas fa-calendar-alt"></i>
+                            <span>Age Limit: 18-33 Years</span>
+                        </div>
+                        <div class="job-detail">
+                            <i class="fas fa-money-bill-wave"></i>
+                            <span>Salary: ₹18,000 - ₹22,000</span>
+                        </div>
+                    </div>
+                    
+                    <div class="job-description">
+                        Multiple posts available including Track Maintainer, Helper, Porter, and other Group D positions across Indian Railways.
+                    </div>
+                    
+                    <div class="job-actions">
+                        <a href="#" class="apply-btn">Apply Online</a>
+                        <button class="save-btn"><i class="fas fa-bookmark"></i></button>
+                    </div>
+                    
+                    <div class="job-meta">
+                        <span class="posted-date">Posted: 2 days ago</span>
+                        <span class="deadline">Deadline: 15 Jan 2025</span>
+                    </div>
+                </div>
+
+                <!-- SSC Jobs -->
+                <div class="job-card" data-category="ssc" data-type="new">
+                    <div class="job-header">
+                        <div>
+                            <div class="job-title">SSC CGL 2025</div>
+                            <div class="job-organization">Staff Selection Commission</div>
+                            <div class="job-location"><i class="fas fa-map-marker-alt"></i> All India</div>
+                        </div>
+                        <div>
+                            <div class="job-type">Government</div>
+                        </div>
+                    </div>
+                    
+                    <div class="job-details">
+                        <div class="job-detail">
+                            <i class="fas fa-users"></i>
+                            <span>Vacancies: 17,727 Posts</span>
+                        </div>
+                        <div class="job-detail">
+                            <i class="fas fa-graduation-cap"></i>
+                            <span>Qualification: Graduate</span>
+                        </div>
+                        <div class="job-detail">
+                            <i class="fas fa-calendar-alt"></i>
+                            <span>Age Limit: 18-32 Years</span>
+                        </div>
+                        <div class="job-detail">
+                            <i class="fas fa-money-bill-wave"></i>
+                            <span>Salary: ₹25,500 - ₹81,100</span>
+                        </div>
+                    </div>
+                    
+                    <div class="job-description">
+                        Combined Graduate Level Examination for various Group B and Group C posts in government departments.
+                    </div>
+                    
+                    <div class="job-actions">
+                        <a href="#" class="apply-btn">Apply Online</a>
+                        <button class="save-btn"><i class="fas fa-bookmark"></i></button>
+                    </div>
+                    
+                    <div class="job-meta">
+                        <span class="posted-date">Posted: 1 day ago</span>
+                        <span class="deadline">Deadline: 25 Jan 2025</span>
+                    </div>
+                </div>
+
+                <!-- Banking Jobs -->
+                <div class="job-card" data-category="banking" data-type="closing-soon">
+                    <div class="job-header">
+                        <div>
+                            <div class="job-title">SBI PO Recruitment</div>
+                            <div class="job-organization">State Bank of India</div>
+                            <div class="job-location"><i class="fas fa-map-marker-alt"></i> All India</div>
+                        </div>
+                        <div>
+                            <div class="job-type">Banking</div>
+                        </div>
+                    </div>
+                    
+                    <div class="job-details">
+                        <div class="job-detail">
+                            <i class="fas fa-users"></i>
+                            <span>Vacancies: 2,000 Posts</span>
+                        </div>
+                        <div class="job-detail">
+                            <i class="fas fa-graduation-cap"></i>
+                            <span>Qualification: Graduate</span>
+                        </div>
+                        <div class="job-detail">
+                            <i class="fas fa-calendar-alt"></i>
+                            <span>Age Limit: 21-30 Years</span>
+                        </div>
+                        <div class="job-detail">
+                            <i class="fas fa-money-bill-wave"></i>
+                            <span>Salary: ₹23,700 - ₹42,020</span>
+                        </div>
+                    </div>
+                    
+                    <div class="job-description">
+                        Probationary Officer positions in State Bank of India branches across the country.
+                    </div>
+                    
+                    <div class="job-actions">
+                        <a href="#" class="apply-btn">Apply Online</a>
+                        <button class="save-btn"><i class="fas fa-bookmark"></i></button>
+                    </div>
+                    
+                    <div class="job-meta">
+                        <span class="posted-date">Posted: 5 days ago</span>
+                        <span class="deadline">Deadline: 20 Dec 2024</span>
+                    </div>
+                </div>
+
+                <!-- UPSC Jobs -->
+                <div class="job-card" data-category="upsc" data-type="new">
+                    <div class="job-header">
+                        <div>
+                            <div class="job-title">UPSC Civil Services 2025</div>
+                            <div class="job-organization">Union Public Service Commission</div>
+                            <div class="job-location"><i class="fas fa-map-marker-alt"></i> All India</div>
+                        </div>
+                        <div>
+                            <div class="job-type">Civil Service</div>
+                        </div>
+                    </div>
+                    
+                    <div class="job-details">
+                        <div class="job-detail">
+                            <i class="fas fa-users"></i>
+                            <span>Vacancies: 1,056 Posts</span>
+                        </div>
+                        <div class="job-detail">
+                            <i class="fas fa-graduation-cap"></i>
+                            <span>Qualification: Graduate</span>
+                        </div>
+                        <div class="job-detail">
+                            <i class="fas fa-calendar-alt"></i>
+                            <span>Age Limit: 21-32 Years</span>
+                        </div>
+                        <div class="job-detail">
+                            <i class="fas fa-money-bill-wave"></i>
+                            <span>Salary: ₹56,100 - ₹2,50,000</span>
+                        </div>
+                    </div>
+                    
+                    <div class="job-description">
+                        IAS, IPS, IFS and other Group A services examination for administrative positions.
+                    </div>
+                    
+                    <div class="job-actions">
+                        <a href="#" class="apply-btn">Apply Online</a>
+                        <button class="save-btn"><i class="fas fa-bookmark"></i></button>
+                    </div>
+                    
+                    <div class="job-meta">
+                        <span class="posted-date">Posted: 3 days ago</span>
+                        <span class="deadline">Deadline: 28 Feb 2025</span>
+                    </div>
+                </div>
+
+                <!-- Teaching Jobs -->
+                <div class="job-card" data-category="teaching" data-type="urgent">
+                    <div class="job-header">
+                        <div>
+                            <div class="job-title">WBTET 2025</div>
+                            <div class="job-organization">West Bengal Board of Primary Education</div>
+                            <div class="job-location"><i class="fas fa-map-marker-alt"></i> West Bengal</div>
+                        </div>
+                        <div>
+                            <div class="job-type">Teaching</div>
+                            <div class="urgent">URGENT</div>
+                        </div>
+                    </div>
+                    
+                    <div class="job-details">
+                        <div class="job-detail">
+                            <i class="fas fa-users"></i>
+                            <span>Vacancies: 16,500 Posts</span>
+                        </div>
+                        <div class="job-detail">
+                            <i class="fas fa-graduation-cap"></i>
+                            <span>Qualification: 12th + D.El.Ed</span>
+                        </div>
+                        <div class="job-detail">
+                            <i class="fas fa-calendar-alt"></i>
+                            <span>Age Limit: 18-40 Years</span>
+                        </div>
+                        <div class="job-detail">
+                            <i class="fas fa-money-bill-wave"></i>
+                            <span>Salary: ₹17,000 - ₹25,000</span>
+                        </div>
+                    </div>
+                    
+                    <div class="job-description">
+                        West Bengal Teachers Eligibility Test for Primary Teacher positions in government schools.
+                    </div>
+                    
+                    <div class="job-actions">
+                        <a href="#" class="apply-btn">Apply Online</a>
+                        <button class="save-btn"><i class="fas fa-bookmark"></i></button>
+                    </div>
+                    
+                    <div class="job-meta">
+                        <span class="posted-date">Posted: 1 day ago</span>
+                        <span class="deadline">Deadline: 12 Jan 2025</span>
+                    </div>
+                </div>
+
+                <!-- Police Jobs -->
+                <div class="job-card" data-category="police" data-type="new">
+                    <div class="job-header">
+                        <div>
+                            <div class="job-title">WB Police Constable</div>
+                            <div class="job-organization">West Bengal Police</div>
+                            <div class="job-location"><i class="fas fa-map-marker-alt"></i> West Bengal</div>
+                        </div>
+                        <div>
+                            <div class="job-type">Police</div>
+                        </div>
+                    </div>
+                    
+                    <div class="job-details">
+                        <div class="job-detail">
+                            <i class="fas fa-users"></i>
+                            <span>Vacancies: 8,419 Posts</span>
+                        </div>
+                        <div class="job-detail">
+                            <i class="fas fa-graduation-cap"></i>
+                            <span>Qualification: 12th Pass</span>
+                        </div>
+                        <div class="job-detail">
+                            <i class="fas fa-calendar-alt"></i>
+                            <span>Age Limit: 18-27 Years</span>
+                        </div>
+                        <div class="job-detail">
+                            <i class="fas fa-money-bill-wave"></i>
+                            <span>Salary: ₹19,500 - ₹32,000</span>
+                        </div>
+                    </div>
+                    
+                    <div class="job-description">
+                        Police Constable recruitment in West Bengal Police for maintaining law and order.
+                    </div>
+                    
+                    <div class="job-actions">
+                        <a href="#" class="apply-btn">Apply Online</a>
+                        <button class="save-btn"><i class="fas fa-bookmark"></i></button>
+                    </div>
+                    
+                    <div class="job-meta">
+                        <span class="posted-date">Posted: 4 days ago</span>
+                        <span class="deadline">Deadline: 5 Feb 2025</span>
+                    </div>
+                </div>
+
+                <!-- Central Government Jobs -->
+                <div class="job-card" data-category="central" data-type="new">
+                    <div class="job-header">
+                        <div>
+                            <div class="job-title">IBPS Clerk 2025</div>
+                            <div class="job-organization">Institute of Banking Personnel Selection</div>
+                            <div class="job-location"><i class="fas fa-map-marker-alt"></i> All India</div>
+                        </div>
+                        <div>
+                            <div class="job-type">Banking</div>
+                        </div>
+                    </div>
+                    
+                    <div class="job-details">
+                        <div class="job-detail">
+                            <i class="fas fa-users"></i>
+                            <span>Vacancies: 6,128 Posts</span>
+                        </div>
+                        <div class="job-detail">
+                            <i class="fas fa-graduation-cap"></i>
+                            <span>Qualification: Graduate</span>
+                        </div>
+                        <div class="job-detail">
+                            <i class="fas fa-calendar-alt"></i>
+                            <span>Age Limit: 20-28 Years</span>
+                        </div>
+                        <div class="job-detail">
+                            <i class="fas fa-money-bill-wave"></i>
+                            <span>Salary: ₹19,900 - ₹31,540</span>
+                        </div>
+                    </div>
+                    
+                    <div class="job-description">
+                        Clerical cadre positions in various public sector banks across India.
+                    </div>
+                    
+                    <div class="job-actions">
+                        <a href="#" class="apply-btn">Apply Online</a>
+                        <button class="save-btn"><i class="fas fa-bookmark"></i></button>
+                    </div>
+                    
+                    <div class="job-meta">
+                        <span class="posted-date">Posted: 6 days ago</span>
+                        <span class="deadline">Deadline: 18 Feb 2025</span>
+                    </div>
+                </div>
+
+                <!-- State Government Jobs -->
+                <div class="job-card" data-category="state" data-type="urgent">
+                    <div class="job-header">
+                        <div>
+                            <div class="job-title">WB Health Department</div>
+                            <div class="job-organization">Government of West Bengal</div>
+                            <div class="job-location"><i class="fas fa-map-marker-alt"></i> West Bengal</div>
+                        </div>
+                        <div>
+                            <div class="job-type">Medical</div>
+                            <div class="urgent">URGENT</div>
+                        </div>
+                    </div>
+                    
+                    <div class="job-details">
+                        <div class="job-detail">
+                            <i class="fas fa-users"></i>
+                            <span>Vacancies: 2,743 Posts</span>
+                        </div>
+                        <div class="job-detail">
+                            <i class="fas fa-graduation-cap"></i>
+                            <span>Qualification: Various</span>
+                        </div>
+                        <div class="job-detail">
+                            <i class="fas fa-calendar-alt"></i>
+                            <span>Age Limit: 18-38 Years</span>
+                        </div>
+                        <div class="job-detail">
+                            <i class="fas fa-money-bill-wave"></i>
+                            <span>Salary: ₹15,000 - ₹45,000</span>
+                        </div>
+                    </div>
+                    
+                    <div class="job-description">
+                        Various positions in West Bengal Health Department including Nursing Staff, Technicians, and Administrative posts.
+                    </div>
+                    
+                    <div class="job-actions">
+                        <a href="#" class="apply-btn">Apply Online</a>
+                        <button class="save-btn"><i class="fas fa-bookmark"></i></button>
+                    </div>
+                    
+                    <div class="job-meta">
+                        <span class="posted-date">Posted: 2 days ago</span>
+                        <span class="deadline">Deadline: 8 Jan 2025</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>Contact Information</h4>
+                <p><i class="fas fa-phone"></i> 9749161047</p>
+                <p><i class="fas fa-envelope"></i> sukhenmalick55@gmail.com</p>
+                <div class="social-links">
+                    <a href="https://www.facebook.com/m.sukhen99" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://www.instagram.com/m.sukhen99" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a href="https://x.com/sukhenmalick55" target="_blank"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <p><a href="about.html">About Us</a></p>
+                <p><a href="services.html">Our Services</a></p>
+                <p><a href="career.html">Career Updates</a></p>
+                <p><a href="contact.html">Contact Us</a></p>
+            </div>
+            <div class="footer-section">
+                <h4>Our Services</h4>
+                <p>PAN Card Services</p>
+                <p>Aadhaar Card Services</p>
+                <p>Insurance Services</p>
+                <p>Government Documentation</p>
+            </div>
+            <div class="footer-section">
+                <h4>Find Us Online</h4>
+                <p><a href="https://posts.gle/juuSESRWgUe49BA57?g_st=aw" target="_blank">Google Business</a></p>
+                <p><a href="https://share.google/R8HjfofFv4lW0A1NX" target="_blank">Location on Google</a></p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 R-point & Cafe. All rights reserved. Designed with ❤️ by Sukhen</p>
+        </div>
+    </footer>
+
+    <script>
+        // Filter functionality
+        function filterJobs(type) {
+            const jobCards = document.querySelectorAll('.job-card');
+            const filterTabs = document.querySelectorAll('.filter-tab');
+            
+            // Remove active class from all tabs
+            filterTabs.forEach(tab => tab.classList.remove('active'));
+            
+            // Add active class to clicked tab
+            event.target.classList.add('active');
+            
+            jobCards.forEach(card => {
+                if (type === 'all') {
+                    card.style.display = 'block';
+                } else if (type === 'urgent') {
+                    card.style.display = card.dataset.type === 'urgent' ? 'block' : 'none';
+                } else if (type === 'new') {
+                    card.style.display = card.dataset.type === 'new' ? 'block' : 'none';
+                } else if (type === 'closing-soon') {
+                    card.style.display = card.dataset.type === 'closing-soon' ? 'block' : 'none';
+                }
+            });
+        }
+
+        // Search functionality
+        function searchJobs() {
+            const searchTerm = document.getElementById('search-job').value.toLowerCase();
+            const category = document.getElementById('job-category').value;
+            const jobCards = document.querySelectorAll('.job-card');
+            
+            jobCards.forEach(card => {
+                const jobTitle = card.querySelector('.job-title').textContent.toLowerCase();
+                const jobOrg = card.querySelector('.job-organization').textContent.toLowerCase();
+                const cardCategory = card.dataset.category;
+                
+                const matchesSearch = jobTitle.includes(searchTerm) || jobOrg.includes(searchTerm);
+                const matchesCategory = category === 'all' || cardCategory === category;
+                
+                card.style.display = matchesSearch && matchesCategory ? 'block' : 'none';
+            });
+        }
+
+        // Save job functionality
+        document.querySelectorAll('.save-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                this.innerHTML = this.innerHTML.includes('fas') ? 
+                    '<i class="fas fa-bookmark" style="color: #1e90ff;"></i>' : 
+                    '<i class="far fa-bookmark"></i>';
+            });
+        });
+
+        // Mobile menu functionality
+        document.querySelector('.mobile-menu').addEventListener('click', function() {
+            const navUl = document.querySelector('nav ul');
+            navUl.style.display = navUl.style.display === 'flex' ? 'none' : 'flex';
+        });
+
+        // Auto-refresh job listings every 5 minutes
+        setInterval(function() {
+            // In a real application, this would fetch new job data
+            console.log('Refreshing job listings...');
+        }, 300000);
+    </script>
+</body>
+</html>

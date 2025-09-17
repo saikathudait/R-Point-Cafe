@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Services - R-point & Cafe</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f5f9ff 0%, #e6f3ff 100%);
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        /* Header Styles */
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(135, 206, 250, 0.2);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(135, 206, 250, 0.1);
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: between;
+            padding: 0.5rem 2rem;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .logo img {
+            width: 50px;
+            height: 50px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(135, 206, 250, 0.3);
+        }
+        
+        .logo h1 {
+            color: #1e90ff;
+            font-size: 1.8rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+        
+        .logo .tagline {
+            font-size: 0.8rem;
+            color: #666;
+            font-weight: 400;
+        }
+        
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+            margin-left: auto;
+        }
+        
+        nav a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        nav a:hover, nav a.active {
+            color: #1e90ff;
+            background: rgba(135, 206, 250, 0.1);
+            transform: translateY(-2px);
+        }
+        
+        .mobile-menu {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 4px;
+        }
+        
+        .mobile-menu span {
+            width: 25px;
+            height: 3px;
+            background: #1e90ff;
+            border-radius: 2px;
+            transition: 0.3s;
+        }
+        
+        /* Main Content */
+        main {
+            margin-top: 80px;
+            padding: 2rem 0;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        /* Page Header */
+        .page-header {
+            text-align: center;
+            padding: 3rem 0;
+            background: linear-gradient(135deg, #e6f3ff 0%, #f0f8ff 100%);
+            margin-bottom: 3rem;
+            border-radius: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .page-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="50" cy="50" r="1" fill="%23ADD8E6" opacity="0.1"/></pattern></defs><rect width="100%" height="100%" fill="url(%23grain)"/></svg>');
+        }
+        
+        .page-header h1 {
+            font-size: 3rem;
+            color: #1e90ff;
+            margin-bottom: 1rem;
+            font-weight: 700;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .page-header p {
+            font-size: 1.2rem;
+            color: #666;
+            position: relative;
+            z-index: 2;
+        }
+        
+        /* Service Categories */
+        .service-categories {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+        
+        .category-btn {
+            background: white;
+            color: #1e90ff;
+            padding: 0.8rem 1.5rem;
+            border: 2px solid #1e90ff;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+        
+        .category-btn:hover, .category-btn.active {
+            background: #1e90ff;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(30, 144, 255, 0.3);
+        }
+        
+        /* Services Grid */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .service-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(135, 206, 250, 0.1);
+            border: 1px solid rgba(135, 206, 250, 0.2);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(135deg, #1e90ff, #87ceeb);
+        }
+        
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 60px rgba(135, 206, 250, 0.2);
+        }
+        
+        .service-icon {
+            font-size: 2.5rem;
+            color: #1e90ff;
+            margin-bottom: 1rem;
+        }
+        
+        .service-card h3 {
+            color: #333;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+        
+        .service-card p {
+            color: #666;
+            margin-bottom: 1.5rem;
+            line-height: 1.7;
+        }
+        
+        .service-features {
+            list-style: none;
+            margin-bottom: 1.5rem;
+        }
+        
+        .service-features li {
+            color: #666;
+            margin-bottom: 0.5rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+        
+        .service-features li::before {
+            content: '✓';
+            color: #1e90ff;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+        
+        .service-price {
+            font-size: 1.2rem;
+            color: #1e90ff;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+        
+        .service-btn {
+            background: linear-gradient(135deg, #1e90ff, #87ceeb);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            width: 100%;
+        }
+        
+        .service-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(30, 144, 255, 0.4);
+        }
+        
+        /* Special Services Section */
+        .special-services {
+            background: linear-gradient(135deg, #1e90ff, #87ceeb);
+            color: white;
+            padding: 4rem 0;
+            border-radius: 20px;
+            margin: 4rem 0;
+            text-align: center;
+        }
+        
+        .special-services h2 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            font-weight: 600;
+        }
+        
+        .special-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .special-item {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 2rem;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .special-item i {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .special-item h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+        
+        .special-item p {
+            opacity: 0.9;
+            line-height: 1.6;
+        }
+        
+        /* Footer */
+        footer {
+            background: linear-gradient(135deg, #1e90ff, #87ceeb);
+            color: white;
+            padding: 3rem 2rem 1rem;
+            margin-top: 4rem;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        
+        .footer-section h4 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+        
+        .footer-section p,
+        .footer-section a {
+            color: rgba(255, 255, 255, 0.9);
+            text-decoration: none;
+            line-height: 1.8;
+        }
+        
+        .footer-section a:hover {
+            color: white;
+            text-decoration: underline;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            color: rgba(255, 255, 255, 0.8);
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-container {
+                padding: 0.5rem 1rem;
+            }
+            
+            nav ul {
+                display: none;
+            }
+            
+            .mobile-menu {
+                display: flex;
+            }
+            
+            .page-header h1 {
+                font-size: 2rem;
+            }
+            
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .service-categories {
+                gap: 0.5rem;
+            }
+            
+            .category-btn {
+                padding: 0.6rem 1rem;
+                font-size: 0.9rem;
+            }
+            
+            .special-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="nav-container">
+            <div class="logo">
+                <img src="Photo\logo.jpeg" alt="R-point Logo">
+                <div>
+                    <h1>R-point & Cafe</h1>
+                    <div class="tagline">By Sukhen</div>
+                </div>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="#services" class="active">Our Services</a></li>
+                    <li><a href="career.html">Career Updates</a></li>
+                    <li><a href="work.html">Work With Us</a></li>
+                    <li><a href="contact.html">Contact Us</a></li>
+                </ul>
+            </nav>
+            <div class="mobile-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <div class="page-header">
+                <h1>Our Services</h1>
+                <p>Comprehensive digital services for all your official documentation needs</p>
+            </div>
+
+            <div class="service-categories">
+                <button class="category-btn active" onclick="filterServices('all')">All Services</button>
+                <button class="category-btn" onclick="filterServices('government')">Government Documents</button>
+                <button class="category-btn" onclick="filterServices('insurance')">Insurance Services</button>
+                <button class="category-btn" onclick="filterServices('digital')">Digital Services</button>
+                <button class="category-btn" onclick="filterServices('business')">Business Services</button>
+            </div>
+
+            <div class="services-grid" id="servicesGrid">
+                <!-- Government Documents -->
+                <div class="service-card" data-category="government">
+                    <div class="service-icon">
+                        <i class="fas fa-id-card"></i>
+                    </div>
+                    <h3>PAN Card Services</h3>
+                    <p>Complete PAN card application, correction, and reprint services with fast processing.</p>
+                    <ul class="service-features">
+                        <li>New PAN Card Application</li>
+                        <li>PAN Card Correction</li>
+                        <li>Duplicate PAN Card</li>
+                        <li>Track Application Status</li>
+                    </ul>
+                    <div class="service-price">Starting from ₹200</div>
+                    <button class="service-btn" onclick="contactService('PAN Card')">Get Started</button>
+                </div>
+
+                <div class="service-card" data-category="government">
+                    <div class="service-icon">
+                        <i class="fas fa-fingerprint"></i>
+                    </div>
+                    <h3>Aadhaar Card Services</h3>
+                    <p>All Aadhaar related services including new enrollment, updates, and corrections.</p>
+                    <ul class="service-features">
+                        <li>New Aadhaar Enrollment</li>
+                        <li>Demographic Updates</li>
+                        <li>Biometric Updates</li>
+                        <li>Aadhaar Download</li>
+                    </ul>
+                    <div class="service-price">Starting from ₹50</div>
+                    <button class="service-btn" onclick="contactService('Aadhaar Card')">Get Started</button>
+                </div>
+
+                <div class="service-card" data-category="government">
+                    <div class="service-icon">
+                        <i class="fas fa-vote-yea"></i>
+                    </div>
+                    <h3>Voter ID Card</h3>
+                    <p>Voter ID registration, corrections, and address change services.</p>
+                    <ul class="service-features">
+                        <li>New Voter Registration</li>
+                        <li>Name Correction</li>
+                        <li>Address Change</li>
+                        <li>Photo Update</li>
+                    </ul>
+                    <div class="service-price">Starting from ₹100</div>
+                    <button class="service-btn" onclick="contactService('Voter ID')">Get Started</button>
+                </div>
+
+                <div class="service-card" data-category="government">
+                    <div class="service-icon">
+                        <i class="fas fa-car"></i>
+                    </div>
+                    <h3>Driving License</h3>
+                    <p>Complete driving license services from application to renewal.</p>
+                    <ul class="service-features">
+                        <li>Learning License</li>
+                        <li>Permanent License</li>
+                        <li>License Renewal</li>
+                        <li>Duplicate License</li>
+                    </ul>
+                    <div class="service-price">Starting from ₹500</div>
+                    <button class="service-btn" onclick="contactService('Driving License')">Get Started</button>
+                </div>
+
+                <div class="service-card" data-category="government">
+                    <div class="service-icon">
+                        <i class="fas fa-certificate"></i>
+                    </div>
+                    <h3>Caste Certificate / EWS</h3>
+                    <p>Application assistance for caste certificates and EWS certificates.</p>
+                    <ul class="service-features">
+                        <li>Caste Certificate</li>
+                        <li>EWS Certificate</li>
+                        <li>Income Certificate</li>
+                        <li>Domicile Certificate</li>
+                    </ul>
+                    <div class="service-price">Starting from ₹300</div>
+                    <button class="service-btn" onclick="contactService('Certificates')">Get Started</button>
+                </div>
+
+                <div class="service-card" data-category="business">
+                    <div class="service-icon">
+                        <i class="fas fa-receipt"></i>
+                    </div>
+                    <h3>GST Registration & Filing</h3>
+                    <p>Complete GST services including registration, filing, and compliance.</p>
+                    <ul class="service-features">
+                        <li>GST Registration</li>
+                        <li>Monthly Returns</li>
+                        <li>Annual Returns</li>
+                        <li>GST Compliance</li>
+                    </ul>
+                    <div class="service-price">Starting from ₹1,000</div>
+                    <button class="service-btn" onclick="contactService('GST Services')">Get Started</button>
+                </div>
+
+                <div class="service-card" data-category="business">
+                    <div class="service-icon">
+                        <i class="fas fa-file-invoice-dollar"></i>
+                    </div>
+                    <h3>ITR Filing</h3>
+                    <p>Income Tax Return filing services for individuals and businesses.</p>
+                    <ul class="service-features">
+                        <li>Individual ITR</li>
+                        <li>Business ITR</li>
+                        <li>Tax Planning</li>
+                        <li>Refund Processing</li>
+                    </ul>
+                    <div class="service-price">Starting from ₹800</div>
+                    <button class="service-btn" onclick="contactService('ITR Filing')">Get Started</button>
+                </div>
+
+                <div class="service-card" data-category="business">
+                    <div class="service-icon">
+                        <i class="fas fa-store"></i>
+                    </div>
+                    <h3>Trade License</h3>
+                    <p>Business license and trade permit application services.</p>
+                    <ul class="service-features">
+                        <li>Trade License Application</li>
+                        <li>Shop & Establishment</li>
+                        <li>FSSAI License</li>
+                        <li>License Renewal</li>
+                    </ul>
+                    <div class="service-price">Starting from ₹2,000</div>
+                    <button class="service-btn" onclick="contactService('Trade License')">Get Started</button>
+                </div>
+
+                <div class="service-card" data-category="government">
+                    <div class="service-icon">
+                        <i class="fas fa-map"></i>
+                    </div>
+                    <h3>Land Related Services</h3>
+                    <p>Property and land documentation services.</p>
+                    <ul class="service-features">
+                        <li>Property Registration</li>
+                        <li>Mutation</li>
+                        <li>Land Records</li>
+                        <li>Title Verification</li>
+                    </ul>
+                    <div class="service-price">Contact for Pricing</div>
+                    <button class="service-btn" onclick="contactService('Land Services')">Get Started</button>
+                </div>
+
+                <!-- Insurance Services -->
+                <div class="service-card" data-category="insurance">
+                    <div class="service-icon">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <h3>Health Insurance</h3>
+                    <p>Comprehensive health insurance plans for individuals and families.</p>
+                    <ul class="service-features">
+                        <li>Individual Plans</li>
+                        <li>Family Floater</li>
+                        <li>Senior Citizen Plans</li>
+                        <li>Critical Illness Cover</li>
+                    </ul>
+                    <div class="service-price">Starting from ₹5,000/year</div>
+                    <button class="service-btn" onclick="contactService('Health Insurance')">Get Started</button>
+                </div>
+
+                <div class="service-card" data-category="insurance">
+                    <div class="service-icon">
+                        <i class="fas fa-user-shield"></i>
+                    </div>
+                    <h3>Life Insurance</h3>
+                    <p>Life insurance policies to secure your family's future.</p>
+                    <ul class="service-features">
+                        <li>Term Life Insurance</li>
+                        <li>Whole Life Insurance</li>
+                        <li>ULIP Plans</li>
+                        <li>Pension Plans</li>
+                    </ul>
+                    <div class="service-price">Starting from ₹3,000/year</div>
+                    <button class="service-btn" onclick="contactService('Life Insurance')">Get Started</button>
+                </div>
+
+                <div class="service-card" data-category="insurance">
+                    <div class="service-icon">
+                        <i class="fas fa-car-crash"></i>
+                    </div>
+                    <h3>Motor Insurance</h3>
+                    <p>Vehicle insurance for cars, bikes, and commercial vehicles.</p>
+                    <ul class="service-features">
+                        <li>Car Insurance</li>
+                        <li>Bike Insurance</li>
+                        <li>Commercial Vehicle</li>
+                        <li>Third Party Coverage</li>
+                    </ul>
+                    <div class="service-price">Starting from ₹2,500/year</div>
+                    <button class="service-btn" onclick="contactService('Motor Insurance')">Get Started</button>
+                </div>
+
+                <!-- Digital Services -->
+                <div class="service-card" data-category="digital">
+                    <div class="service-icon">
+                        <i class="fas fa-train"></i>
+                    </div>
+                    <h3>Train Ticket Booking</h3>
+                    <p>Online train ticket booking and reservation services.</p>
+                    <ul class="service-features">
+                        <li>Ticket Booking</li>
+                        <li>Tatkal Booking</li>
+                        <li>Cancellation</li>
+                        <li>PNR Status Check</li>
+                    </ul>
+                    <div class="service-price">Booking Charges Apply</div>
+                    <button class="service-btn" onclick="contactService('Train Booking')">Get Started</button>
+                </div>
+
+                <div class="service-card" data-category="digital">
+                    <div class="service-icon">
+                        <i class="fas fa-print"></i>
+                    </div>
+                    <h3>Printing & Scanning</h3>
+                    <p>Document printing, scanning, and photocopying services.</p>
+                    <ul class="service-features">
+                        <li>Document Printing</li>
+                        <li>Color Printing</li>
+                        <li>Scanning Services</li>
+                        <li>Lamination</li>
+                    </ul>
+                    <div class="service-price">Starting from ₹2/page</div>
+                    <button class="service-btn" onclick="contactService('Printing')">Get Started</button>
+                </div>
+
+                <div class="service-card" data-category="digital">
+                    <div class="service-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h3>Mobile Recharge</h3>
+                    <p>Mobile and DTH recharge services for all operators.</p>
+                    <ul class="service-features">
+                        <li>All Network Recharge</li>
+                        <li>DTH Recharge</li>
+                        <li>Data Card Recharge</li>
+                        <li>Bill Payments</li>
+                    </ul>
+                    <div class="service-price">No Extra Charges</div>
+                    <button class="service-btn" onclick="contactService('Recharge')">Get Started</button>
+                </div>
+            </div>
+
+            <div class="special-services">
+                <div class="container">
+                    <h2>Why Choose Our Services?</h2>
+                    <div class="special-grid">
+                        <div class="special-item">
+                            <i class="fas fa-clock"></i>
+                            <h3>Fast Processing</h3>
+                            <p>Quick turnaround time for all services with efficient processing systems.</p>
+                        </div>
+                        <div class="special-item">
+                            <i class="fas fa-shield-check"></i>
+                            <h3>Secure & Reliable</h3>
+                            <p>Your documents and personal information are completely safe with us.</p>
+                        </div>
+                        <div class="special-item">
+                            <i class="fas fa-headset"></i>
+                            <h3>Expert Support</h3>
+                            <p>Professional guidance and support throughout the entire process.</p>
+                        </div>
+                        <div class="special-item">
+                            <i class="fas fa-money-bill-wave"></i>
+                            <h3>Affordable Pricing</h3>
+                            <p>Competitive rates for all services without hidden charges.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>Contact Information</h4>
+                <p><i class="fas fa-phone"></i> 9749161047</p>
+                <p><i class="fas fa-envelope"></i> sukhenmalick55@gmail.com</p>
+                <div class="social-links">
+                    <a href="https://www.facebook.com/m.sukhen99" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://www.instagram.com/m.sukhen99" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a href="https://x.com/sukhenmalick55" target="_blank"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <p><a href="index.html">Home</a></p>
+                <p><a href="about.html">About Us</a></p>
+                <p><a href="career.html">Career Updates</a></p>
+                <p><a href="contact.html">Contact Us</a></p>
+            </div>
+            <div class="footer-section">
+                <h4>Our Services</h4>
+                <p>PAN Card Services</p>
+                <p>Aadhaar Card Services</p>
+                <p>Insurance Services</p>
+                <p>Government Documentation</p>
+            </div>
+            <div class="footer-section">
+                <h4>Find Us Online</h4>
+                <p><a href="https://posts.gle/juuSESRWgUe49BA57?g_st=aw" target="_blank">Google Business</a></p>
+                <p><a href="https://share.google/R8HjfofFv4lW0A1NX" target="_blank">Location on Google</a></p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 R-point & Cafe. All rights reserved. Designed with ❤️ by Sukhen</p>
+        </div>
+    </footer>
+
+    <script>
+        // Service filtering
+        function filterServices(category) {
+            const cards = document.querySelectorAll('.service-card');
+            const buttons = document.querySelectorAll('.category-btn');
+            
+            // Update active button
+            buttons.forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            // Filter cards
+            cards.forEach(card => {
+                if (category === 'all' || card.dataset.category === category) {
+                    card.style.display = 'block';
+                    setTimeout(() => {
+                        card.style.opacity = '1';
+                        card.style.transform = 'translateY(0)';
+                    }, 100);
+                } else {
+                    card.style.opacity = '0';
+                    card.style.transform = 'translateY(20px)';
+                    setTimeout(() => {
+                        card.style.display = 'none';
+                    }, 300);
+                }
+            });
+        }
+
+        // Contact service function
+        function contactService(service) {
+            const phone = '9749161047';
+            const message = `Hello! I'm interested in your ${service} service. Please provide more details.`;
+            const encodedMessage = encodeURIComponent(message);
+            window.open(`https://wa.me/${phone}?text=${encodedMessage}`, '_blank');
+        }
+
+        // Mobile menu functionality
+        document.querySelector('.mobile-menu').addEventListener('click', function() {
+            document.querySelector('nav ul').style.display = 
+                document.querySelector('nav ul').style.display === 'flex' ? 'none' : 'flex';
+        });
+
+        // Add transition styles
+        document.querySelectorAll('.service-card').forEach(card => {
+            card.style.transition = 'all 0.3s ease';
+        });
+    </script>
+</body>
+</html>
